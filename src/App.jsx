@@ -154,7 +154,7 @@ function Login({ onLogin }) {
       <div style={{ width: "100%", maxWidth: 380 }}>
         <div style={{ textAlign: "center", marginBottom: 36 }}>
           <div style={{ display: "flex", justifyContent: "center", marginBottom: 12 }}><img src={LOGO_B64} alt="Krishka Publicidad" style={{ width: 110, height: 110, objectFit: "contain", display: "block" }} /></div>
-          <div style={{ fontFamily: "Syne", fontWeight: 800, fontSize: 22, color: "#2a3a10", letterSpacing: ".01em" }}>Krishka de la Oz</div>
+          <div style={{ fontFamily: "Syne", fontWeight: 800, fontSize: 22, color: "#2a3a10", letterSpacing: ".01em" }}>KRISHKA de la Hoz</div>
           <div style={{ fontFamily: "Syne", fontWeight: 700, fontSize: 13, color: "#6b7c3f", letterSpacing: ".12em", marginTop: 2 }}>KRISHKA PUBLICIDAD</div>
           <div style={{ fontSize: 12, color: "#888", marginTop: 6 }}>Sistema de seguimiento de campañas</div>
         </div>
@@ -336,11 +336,13 @@ export default function App() {
   const camp = campanas.find(c => c.id === selectedId) || visibleCampanas[0] || campanas[0];
   const weekNotes = notes[camp.id]?.[currentWeek] || {};
   const campPends = pends[camp.id] || [];
+  const campPendsLen = campPends.length;
+  const campPendsDone = campPends.filter(p => p.done).length;
 
   const completionPct = useMemo(() => {
-    if (!campPends.length) return 0;
-    return Math.round((campPends.filter(p => p.done).length / campPends.length) * 100);
-  }, [campPends]);
+    if (!campPendsLen) return 0;
+    return Math.round((campPendsDone / campPendsLen) * 100);
+  }, [campPendsLen, campPendsDone]);
 
   const diasWithNotes = DAYS.filter(d => weekNotes[d.toLowerCase()]);
   const weeklySummary = diasWithNotes.map(d => `• ${d}: ${weekNotes[d.toLowerCase()]}`).join("\n");
@@ -374,7 +376,7 @@ export default function App() {
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <img src={LOGO_B64} alt="logo" style={{ width: 36, height: 36, objectFit: "contain" }} />
             <div>
-              <div style={{ fontFamily: "Syne", fontWeight: 800, fontSize: 13, color: "#2a3a10", lineHeight: 1.1, whiteSpace: "nowrap" }}>Krishka de la Oz</div>
+              <div style={{ fontFamily: "Syne", fontWeight: 800, fontSize: 13, color: "#2a3a10", lineHeight: 1.1, whiteSpace: "nowrap" }}>KRISHKA de la Hoz</div>
               <div style={{ fontFamily: "Syne", fontWeight: 700, fontSize: 9, color: "#6b7c3f", letterSpacing: ".1em" }}>KRISHKA PUBLICIDAD</div>
             </div>
           </div>
